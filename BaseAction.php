@@ -1,11 +1,13 @@
 <?php
-namespace kilyakus\controller;
+namespace kilyakus\action;
 
 use Yii;
 use yii\base\Action;
 
 class BaseAction extends Action
 {
+    public $error = null;
+    
     public function formatResponse($success = '', $back = true)
     {
         if(Yii::$app->request->isAjax){
