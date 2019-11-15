@@ -7,7 +7,12 @@ use yii\base\Action;
 class BaseAction extends Action
 {
     public $error = null;
-    
+
+    public function flash($type, $message)
+    {
+        Yii::$app->getSession()->setFlash($type=='error'?'danger':$type, $message);
+    }
+
     public function formatResponse($success = '', $back = true)
     {
         if(Yii::$app->request->isAjax){
