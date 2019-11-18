@@ -3,6 +3,7 @@ namespace kilyakus\action;
 
 use Yii;
 use yii\base\Action;
+use yii\helpers\Url;
 
 class BaseAction extends Action
 {
@@ -11,6 +12,16 @@ class BaseAction extends Action
     public function flash($type, $message)
     {
         Yii::$app->getSession()->setFlash($type=='error'?'danger':$type, $message);
+    }
+
+    public function back()
+    {
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function redirect($url, $statusCode = 302)
+    {
+        return Yii::$app->getResponse()->redirect(Url::to($url), $statusCode);
     }
 
     public function formatResponse($success = '', $back = true)
